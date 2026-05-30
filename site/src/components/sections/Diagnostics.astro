@@ -1,0 +1,51 @@
+---
+import Section from '../Section.astro';
+import SwatchGrid from '../SwatchGrid.astro';
+import Editor from '../Editor.astro';
+import { diagnostics } from '../../data/palette';
+
+// LSP の error / warning / info。波線アンダーライン + ポップアップを再現（波括弧を含むため set:html）。
+const diagErr = `<div class="diag-code"><span class="kd">const</span> <span class="pun">port</span><span class="pun">: </span><span class="ty">number</span> <span class="pun">= </span><span class="str sq-err">'8080'</span><span class="pun">;</span></div>
+<div class="diag-pop err"><span class="sev">✗ error</span>Type <code>'string'</code> is not assignable to type <code>'number'</code>.<span class="src">ts(2322)</span></div>`;
+
+const diagWarn = `<div class="diag-code"><span class="kw">export</span> <span class="kw">default</span> <span class="kd">function</span> <span class="fn">Card</span><span class="pun">({ </span><span class="par sq-warn">layout</span> <span class="pun">= </span><span class="str">'withSide'</span><span class="pun">, </span><span class="par">className</span><span class="pun"> }) {</span></div>
+<div class="diag-pop warn"><span class="sev">⚠ warning</span>Parameter <code>'layout'</code> is declared but never used.<span class="src">help: Consider removing this parameter. (oxc <span class="rule">eslint(no-unused-vars)</span>)</span></div>`;
+
+const diagInfo = `<div class="diag-code"><span class="kw sq-info">await</span> <span class="fn">fetchData</span><span class="pun">();</span></div>
+<div class="diag-pop info"><span class="sev">ℹ info</span><code>'await'</code> has no effect on the type of this expression.<span class="src">ts(80007)</span></div>`;
+---
+
+<Section title="5. 診断ポップアップ" tag="独自背景" tagCustom>
+  <SwatchGrid items={diagnostics} />
+  <p class="note" style="margin-bottom:12px;">
+    LSP の <b>error / warning / info</b>。波線アンダーラインは <code>*</code>（severity 文字色）、ポップアップは <code
+      >*.border</code
+    >（枠）＋ <code>*.background</code>（下地）。背景は Zed デフォルト（＝文字と同じ原色）ではなく、severity 色を α10% に落とした独自値なので主張しすぎず読みやすい。
+  </p>
+  <div class="columns">
+    <div>
+      <Editor file="config.ts" badge="✗ 1" badgeColor="#f92672">
+        <Fragment set:html={diagErr} />
+      </Editor>
+      <p class="note">error: 文字/枠 <code>#f92672</code> ＋ 下地 <code>#b12f5b1a</code></p>
+    </div>
+
+    <div>
+      <Editor file="Card.jsx" badge="⚠ 1" badgeColor="#e2e22e">
+        <Fragment set:html={diagWarn} />
+      </Editor>
+      <p class="note">warning: 文字/枠 <code>#e2e22e</code> ＋ 下地 <code>#8485281a</code>（スクショのこれ）</p>
+    </div>
+
+    <div>
+      <Editor file="fetch.ts" badge="ℹ 1" badgeColor="#3db1f5">
+        <Fragment set:html={diagInfo} />
+      </Editor>
+      <p class="note">info: 文字/枠 <code>#3db1f5</code> ＋ 下地 <code>#3c708c1a</code></p>
+    </div>
+  </div>
+  <p class="note" style="margin-top:10px;">
+    ★ <code>*.border</code> は base カラーと同値（＝Zed デフォルト挙動）なので省略可。だが <code>*.background</code
+    > はデフォルトだと文字と同じ原色になり毒々しくなるため、この暗い下地は残す価値がある。
+  </p>
+</Section>

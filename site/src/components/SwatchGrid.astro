@@ -1,0 +1,14 @@
+---
+import Swatch from './Swatch.astro';
+import type { Swatch as SwatchType } from '../data/palette';
+
+interface Props {
+  items: SwatchType[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class="grid">
+  {items.map((s) => <Swatch hex={s.hex} role={s.role} />)}
+</div>

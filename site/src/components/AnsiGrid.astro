@@ -1,0 +1,16 @@
+---
+import { ansiColors } from '../data/palette';
+---
+
+<div class="ansi-grid">
+  {
+    ansiColors.map((c) => (
+      <div class="ansi-cell">
+        <span class="box" style={`background:${c.hex}`} />
+        {c.name}
+        <br />
+        <span class="h">{c.hex}</span>
+      </div>
+    ))
+  }
+</div>

@@ -1,0 +1,10 @@
+# dependencies
+node_modules/
+
+# Astro build output (Pages は GitHub Actions でビルドするためコミットしない)
+site/dist/
+site/.astro/
+
+# misc
+.DS_Store
+*.log

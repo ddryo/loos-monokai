@@ -1,0 +1,44 @@
+---
+import Section from '../Section.astro';
+import SwatchGrid from '../SwatchGrid.astro';
+import Editor from '../Editor.astro';
+import { syntaxCore } from '../../data/palette';
+
+// コード見本は波括弧・記号を多く含むため、Astro の式評価を避けて set:html で出力する。
+const blockJs = `<span class="ln"><span class="c">// i18n ヘルパー</span></span><span class="ln"><span class="kw">import</span> <span class="pun">{</span> <span class="num">__</span> <span class="pun">}</span> <span class="kw">from</span> <span class="str">'@wordpress/i18n'</span><span class="pun">;</span></span><span class="ln"></span><span class="ln"><span class="kd">const</span> <span class="pun">label</span> <span class="pun">=</span> <span class="num">__</span><span class="pun">(</span><span class="str">'Box'</span><span class="pun">);</span></span><span class="ln"><span class="kd">let</span> <span class="pun">count</span> <span class="pun">=</span> <span class="num">3</span><span class="pun">;</span></span><span class="ln"></span><span class="ln"><span class="kd">function</span> <span class="fn">render</span><span class="pun">(</span><span class="par">props</span><span class="pun">)</span> <span class="pun">{</span></span><span class="ln">  <span class="kw">return</span> <span class="pun">props.</span><span class="pun">title</span><span class="pun">;</span></span><span class="ln"><span class="pun">}</span></span>`;
+
+const styleScss = `<span class="ln"><span class="c">// alignfull</span></span><span class="ln"><span class="sel">.alignfull</span> <span class="pun">{</span></span><span class="ln">  <span class="pun">max-inline-size:</span> <span class="num">100</span><span class="unit">%</span><span class="pun">;</span></span><span class="ln"></span><span class="ln">  <span class="kw">:where</span><span class="pun">(</span><span class="sel">.has--gutter</span><span class="pun">)</span> <span class="kw">&gt;</span> <span class="kw">&amp;</span> <span class="pun">{</span></span><span class="ln">    <span class="pun">margin-inline:</span> <span class="fn">calc</span><span class="pun">(</span><span class="fn">var</span><span class="pun">(</span><span class="pun">--gutter</span><span class="pun">)</span> <span class="kw">*</span> <span class="num">-1</span><span class="pun">);</span></span><span class="ln">  <span class="pun">}</span></span><span class="ln"><span class="pun">}</span></span>`;
+
+const blockJson = `<span class="ln"><span class="pun">{</span></span><span class="ln">  <span class="jkey">"apiVersion"</span><span class="pun">:</span> <span class="num">3</span><span class="pun">,</span></span><span class="ln">  <span class="jkey">"name"</span><span class="pun">:</span> <span class="str">"lism-blocks/box"</span><span class="pun">,</span></span><span class="ln">  <span class="jkey">"keywords"</span><span class="pun">:</span> <span class="pun">[</span></span><span class="ln">    <span class="str">"group"</span></span><span class="ln">  <span class="pun">],</span></span><span class="ln">  <span class="jkey">"supports"</span><span class="pun">:</span> <span class="pun">{</span> <span class="pun">}</span></span><span class="ln"><span class="pun">}</span></span>`;
+---
+
+<Section title="1. シンタックスコア" tag="Monokai キーカラー">
+  <SwatchGrid items={syntaxCore} />
+  <p class="note">
+    青イタリック <code>#3db1f5</code> のみ非 Monokai の独自追加（<code>keyword.declaration</code>・<code
+      >punctuation.special</code
+    >）。他は Monokai 純正。
+  </p>
+  <div class="columns">
+    <div>
+      <Editor file="block.js">
+        <pre set:html={blockJs}></pre>
+      </Editor>
+      <p class="note">青イタリック＝<code>keyword.declaration</code> / 緑＝関数名 / 紫＝<code>__</code>(定数扱い)</p>
+    </div>
+
+    <div>
+      <Editor file="style.scss">
+        <pre set:html={styleScss}></pre>
+      </Editor>
+      <p class="note">緑＝セレクタ / 赤＝<code>%</code>(単位) / 紫＝数値 / 白＝プロパティ名</p>
+    </div>
+
+    <div>
+      <Editor file="block.json">
+        <pre set:html={blockJson}></pre>
+      </Editor>
+      <p class="note">水色＝JSON キー（<code>property.json_key</code>）/ 黄＝値 / 紫＝数値</p>
+    </div>
+  </div>
+</Section>

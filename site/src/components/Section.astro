@@ -1,0 +1,18 @@
+---
+interface Props {
+  /** 見出し（連番を含む。例: "1. シンタックスコア"） */
+  title: string;
+  /** 見出し右のタグ。省略時は非表示 */
+  tag?: string;
+  /** タグを独自カラー（青）にする場合 true */
+  tagCustom?: boolean;
+}
+
+const { title, tag, tagCustom = false } = Astro.props;
+---
+
+<h2>
+  {title}
+  {tag && <span class={tagCustom ? 'tag custom' : 'tag'}>{tag}</span>}
+</h2>
+<slot />

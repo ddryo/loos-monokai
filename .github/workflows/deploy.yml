@@ -1,0 +1,43 @@
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    # サイト関連の変更時のみビルド（テーマ JSON 単体の更新では走らせない）
+    paths:
+      - 'site/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 進行中のデプロイは完了させ、同時実行はキューイングする
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Build with Astro
+        uses: withastro/action@v6
+        with:
+          # Astro プロジェクトはリポジトリ直下ではなく site/ にある
+          path: ./site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

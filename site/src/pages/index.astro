@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SyntaxCore from '../components/sections/SyntaxCore.astro';
+import Chrome from '../components/sections/Chrome.astro';
+import Highlight from '../components/sections/Highlight.astro';
+import DiffSection from '../components/sections/DiffSection.astro';
+import Diagnostics from '../components/sections/Diagnostics.astro';
+import Terminal from '../components/sections/Terminal.astro';
+---
+
+<Layout title="LOOS Monokai — Palette & Preview">
+  <h1>LOOS <span class="accent">Monokai</span> — Palette &amp; Preview</h1>
+  <p class="sub">themes/loos-monokai.json のカラーを機能グループ別に整理。各セクション＝スウォッチ＋実物プレビュー。</p>
+
+  <SyntaxCore />
+  <Chrome />
+  <Highlight />
+  <DiffSection />
+  <Diagnostics />
+  <Terminal />
+</Layout>

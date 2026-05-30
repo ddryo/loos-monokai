@@ -1,0 +1,26 @@
+---
+import Section from '../Section.astro';
+import SwatchGrid from '../SwatchGrid.astro';
+import Editor from '../Editor.astro';
+import { highlight } from '../../data/palette';
+
+// カーソル位置と同名シンボルの 4 種ハイライト出し分けを示すコード見本。
+const parseArgs = `<span class="ln"><span class="c">// カーソル位置の "args" と同名シンボルが全てハイライトされる</span></span><span class="ln"><span class="kd">const</span> <span class="pun hl-write">args</span> <span class="pun">=</span> <span class="pun">process.</span><span class="fn">argv</span><span class="pun">.</span><span class="fn">slice</span><span class="pun">(</span><span class="num">2</span><span class="pun">);</span>          <span class="c">← 宣言＝write</span></span><span class="ln"><span class="kd">const</span> <span class="pun">idx</span> <span class="pun">=</span> <span class="pun hl-read">args</span><span class="pun">.</span><span class="fn">indexOf</span><span class="pun">(</span><span class="str">'--threshold'</span><span class="pun">);</span>   <span class="c">← 参照＝read</span></span><span class="ln"><span class="kd">const</span> <span class="pun">rest</span> <span class="pun">=</span> <span class="pun hl-read">args</span><span class="pun">.</span><span class="fn">filter</span><span class="pun">(</span><span class="pun">(</span><span class="par">a</span><span class="pun">)</span> <span class="kw">=&gt;</span> <span class="par">a</span><span class="pun">[</span><span class="num">0</span><span class="pun">]</span> <span class="kw">!==</span> <span class="str">'-'</span><span class="pun">);</span>  <span class="c">← 参照＝read</span></span><span class="ln"></span><span class="ln"><span class="kd">const</span> <span class="pun">label</span> <span class="pun">=</span> <span class="str hl-sel">'ja-translation-helper'</span><span class="pun">;</span>   <span class="c">← ダブルクリックで選択＝selection</span></span><span class="ln"><span class="kd">const</span> <span class="pun hl-find">lang</span><span class="pun">Key</span> <span class="pun">=</span> <span class="fn">get</span><span class="fn hl-find">Lang</span><span class="pun">(</span><span class="pun">current</span><span class="pun hl-find">Lang</span><span class="pun">);</span> <span class="c">← 検索 "lang" の一致＝search</span></span>`;
+---
+
+<Section title="3. 選択・ハイライト" tag="背景フィル" tagCustom>
+  <SwatchGrid items={highlight} />
+  <p class="note" style="margin-bottom:10px;">
+    ★ シンボルにカーソルを置くと同名箇所が一斉にハイライト。<b>宣言/代入＝write(明るい紫 #6a6a96)</b>・<b
+      >参照＝read(暗い紫 #4a4a76)</b
+    > で出し分け（定数/変数は無関係）。テキスト選択＝<b>グレー #878b91</b>、検索一致＝<b>茶 #75715e</b
+    >。4 種とも色相がバラバラなのが分かる。
+  </p>
+
+  <Editor file="parse-args.ts" badge="— カーソルを args に置いた状態" badgeColor="#90908a" maxWidth="760px">
+    <pre set:html={parseArgs}></pre>
+  </Editor>
+  <p class="note">
+    同じ「下地フィル」でも色相が <b>紫(単語)・グレー(選択)・茶(検索)</b> とバラバラ。write/read の紫だけは意図的に明暗で段階を付けている。
+  </p>
+</Section>

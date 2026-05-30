@@ -1,0 +1,60 @@
+---
+import Section from '../Section.astro';
+import SwatchGrid from '../SwatchGrid.astro';
+import { chrome } from '../../data/palette';
+
+// Zed の UI クローム全体を再現したモックアップ。波括弧を含むコード行があるため set:html で出力する。
+// ファイル名・プロジェクト名は新リポジトリ（zed-loos-monokai / loos-monokai.json）に合わせている。
+const zedMockup = `<div class="z-title">
+  <span class="dot" style="background:#f92672"></span><span class="dot" style="background:#e6db74"></span><span class="dot" style="background:#a6e22e"></span>
+  <span style="margin-left:6px;">loos-monokai.json — zed-loos-monokai</span>
+</div>
+<div class="z-side">
+  <div class="z-sec">Project</div>
+  <div class="z-row dir">▾ zed-loos-monokai</div>
+  <div class="z-row">themes</div>
+  <div class="z-row sel">loos-monokai.json</div>
+  <div class="z-row hov">extension.toml <span class="muted">＋hover</span></div>
+  <div class="z-row">README.md</div>
+  <div class="z-row"><span class="muted">.gitignore</span></div>
+  <div class="z-sec">Outline</div>
+  <div class="z-row"><span class="muted">themes › style</span></div>
+</div>
+<div class="z-main">
+  <div class="z-tabs">
+    <div class="z-tab active">loos-monokai.json</div>
+    <div class="z-tab">settings.json</div>
+    <div class="z-tab">style.scss</div>
+  </div>
+  <div class="z-edit">
+    <div class="z-gutter"><span>54</span><span>55</span><span class="cur">56</span><span>57</span><span>58</span><span>59</span><span>60</span></div>
+    <div class="z-code">
+      <span class="l"><span class="jkey">"search"</span><span class="pun">: {</span></span>
+      <span class="l">  <span class="jkey">"match_background"</span><span class="pun">: </span><span class="str">"</span><span class="z-find str">#75715e80</span><span class="str">"</span><span class="pun">,</span></span>
+      <span class="l active">  <span class="jkey">"selection"</span><span class="pun">: </span><span class="str">"</span><span class="z-sel str">#878b9180</span><span class="str">"</span><span class="pun">,</span>   <span class="c">← active line</span></span>
+      <span class="l">  <span class="jkey">"highlight"</span><span class="pun">: </span><span class="str">"</span><span class="z-wh str">#4a4a7680</span><span class="str">"</span><span class="pun">,</span></span>
+      <span class="l"><span class="pun">}</span></span>
+      <span class="l"><span class="kd">const</span> <span class="z-wh pun">selection</span> <span class="pun">=</span> <span class="fn z-hover">pick</span><span class="pun">(</span><span class="z-wh pun">selection</span><span class="pun">);</span> <span class="c">// 同名2語＝単語ハイライト</span></span>
+      <span class="l"><span class="kw">return</span> <span class="pun">value</span><span class="pun">;</span></span>
+    </div>
+    <div class="z-pop"><pre><span class="kd">function</span> <span class="fn">pick</span><span class="pun">(</span><span class="par">sel</span><span class="pun">: </span><span class="ty">Selection</span><span class="pun">): </span><span class="ty">Range</span>
+<span class="c">// 選択範囲を返す（シンボルにホバーした時の型情報）</span></pre></div>
+  </div>
+</div>
+<div class="z-status">
+  <span style="color:#a6e22e;"> master</span>
+  <span style="color:#90908a;">⚠ 0  ✗ 0</span>
+  <span style="margin-left:auto; color:#90908a;">Ln 56, Col 14</span>
+  <span style="color:#90908a;">JSON</span>
+</div>`;
+---
+
+<Section title="2. 背景・UI クローム" tag="純正">
+  <SwatchGrid items={chrome} />
+  <div class="zed" set:html={zedMockup}></div>
+  <p class="note">
+    ↑ Zed UI 全体: サイドバー/タブ溝 <code>#1e1f1c</code> / エディタ <code>#272822</code> / アクティブ行 <code
+      >#3e3d32</code
+    > / 選択行・ステータスバー <code>#414339</code>。（中の選択・ハイライト下地は次の §3）
+  </p>
+</Section>
