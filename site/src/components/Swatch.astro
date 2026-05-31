@@ -10,11 +10,11 @@ const { hex, role } = Astro.props;
 // 不透明色との違いをひと目で分かるようにする。
 const isAlpha = hex.length === 9;
 const base = isAlpha ? hex.slice(0, 7) : hex;
-const alpha = isAlpha ? hex.slice(7) : '';
+const alpha = isAlpha ? hex.slice(7) : "";
 ---
 
 <div class="swatch">
-  <div class="chip" style={`background:${hex}`}></div>
+  <div class="chip"><span style={`background:${hex}`}></span></div>
   <div class="meta">
     <div class="hex">{base}{alpha && <span class="alpha">{alpha}</span>}</div>
     <div class="role">{role}</div>

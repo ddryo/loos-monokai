@@ -1,44 +1,92 @@
 ---
-import Section from '../Section.astro';
-import SwatchGrid from '../SwatchGrid.astro';
-import Editor from '../Editor.astro';
-import { syntaxCore } from '../../data/palette';
+import Section from "../Section.astro";
+import SwatchGrid from "../SwatchGrid.astro";
+import Editor from "../Editor.astro";
+import { syntaxCore } from "../../data/palette";
 
 // コード見本は波括弧・記号を多く含むため、Astro の式評価を避けて set:html で出力する。
-const blockJs = `<span class="ln"><span class="c">// i18n ヘルパー</span></span><span class="ln"><span class="kw">import</span> <span class="pun">{</span> <span class="num">__</span> <span class="pun">}</span> <span class="kw">from</span> <span class="str">'@wordpress/i18n'</span><span class="pun">;</span></span><span class="ln"></span><span class="ln"><span class="kd">const</span> <span class="pun">label</span> <span class="pun">=</span> <span class="num">__</span><span class="pun">(</span><span class="str">'Box'</span><span class="pun">);</span></span><span class="ln"><span class="kd">let</span> <span class="pun">count</span> <span class="pun">=</span> <span class="num">3</span><span class="pun">;</span></span><span class="ln"></span><span class="ln"><span class="kd">function</span> <span class="fn">render</span><span class="pun">(</span><span class="par">props</span><span class="pun">)</span> <span class="pun">{</span></span><span class="ln">  <span class="kw">return</span> <span class="pun">props.</span><span class="pun">title</span><span class="pun">;</span></span><span class="ln"><span class="pun">}</span></span>`;
+// 中身に意味はないダミー。各言語とも 11 行に揃えて配色だけを見せる。
+const indexHtml = `<span class="ln"><span class="c">&lt;!-- dummy markup --&gt;</span></span><span class="ln"><span class="pun">&lt;</span><span class="kw">div</span> <span class="attr">class</span><span class="pun">=</span><span class="str">"alpha beta"</span> <span class="attr">data-role</span><span class="pun">=</span><span class="str">"demo"</span><span class="pun">&gt;</span></span><span class="ln">  <span class="pun">&lt;</span><span class="kw">h1</span> <span class="attr">class</span><span class="pun">=</span><span class="str">"title"</span><span class="pun">&gt;</span>Lorem Ipsum<span class="pun">&lt;/</span><span class="kw">h1</span><span class="pun">&gt;</span></span><span class="ln">  <span class="pun">&lt;</span><span class="kw">p</span> <span class="attr">class</span><span class="pun">=</span><span class="str">"lead"</span><span class="pun">&gt;</span></span><span class="ln">    dummy text goes here.</span><span class="ln">  <span class="pun">&lt;/</span><span class="kw">p</span><span class="pun">&gt;</span></span><span class="ln">  <span class="pun">&lt;</span><span class="kw">ul</span> <span class="attr">class</span><span class="pun">=</span><span class="str">"list"</span><span class="pun">&gt;</span></span><span class="ln">    <span class="pun">&lt;</span><span class="kw">li</span><span class="pun">&gt;</span>item one<span class="pun">&lt;/</span><span class="kw">li</span><span class="pun">&gt;</span></span><span class="ln">    <span class="pun">&lt;</span><span class="kw">li</span><span class="pun">&gt;</span>item two<span class="pun">&lt;/</span><span class="kw">li</span><span class="pun">&gt;</span></span><span class="ln">  <span class="pun">&lt;/</span><span class="kw">ul</span><span class="pun">&gt;</span></span><span class="ln"><span class="pun">&lt;/</span><span class="kw">div</span><span class="pun">&gt;</span></span>`;
 
-const styleScss = `<span class="ln"><span class="c">// alignfull</span></span><span class="ln"><span class="sel">.alignfull</span> <span class="pun">{</span></span><span class="ln">  <span class="pun">max-inline-size:</span> <span class="num">100</span><span class="unit">%</span><span class="pun">;</span></span><span class="ln"></span><span class="ln">  <span class="kw">:where</span><span class="pun">(</span><span class="sel">.has--gutter</span><span class="pun">)</span> <span class="kw">&gt;</span> <span class="kw">&amp;</span> <span class="pun">{</span></span><span class="ln">    <span class="pun">margin-inline:</span> <span class="fn">calc</span><span class="pun">(</span><span class="fn">var</span><span class="pun">(</span><span class="pun">--gutter</span><span class="pun">)</span> <span class="kw">*</span> <span class="num">-1</span><span class="pun">);</span></span><span class="ln">  <span class="pun">}</span></span><span class="ln"><span class="pun">}</span></span>`;
+const styleScss = `<span class="ln"><span class="c">// dummy styles</span></span><span class="ln"><span class="sel">.alpha</span> <span class="pun">{</span></span><span class="ln">  <span class="pun">display:</span> flex<span class="pun">;</span></span><span class="ln">  <span class="pun">gap:</span> <span class="fn">var</span><span class="pun">(</span><span class="pun">--gap</span><span class="pun">,</span> <span class="num">16</span><span class="unit">px</span><span class="pun">);</span></span><span class="ln"></span><span class="ln">  <span class="kw">&amp;</span><span class="sel">:hover</span> <span class="pun">{</span></span><span class="ln">    <span class="pun">color:</span> <span class="fn">rgba</span><span class="pun">(</span><span class="num">10</span><span class="pun">,</span> <span class="num">20</span><span class="pun">,</span> <span class="num">30</span><span class="pun">,</span> <span class="num">0.5</span><span class="pun">);</span></span><span class="ln">    <span class="pun">margin:</span> <span class="fn">clamp</span><span class="pun">(</span><span class="num">1</span><span class="unit">rem</span><span class="pun">,</span> <span class="num">2</span><span class="unit">vw</span><span class="pun">,</span> <span class="num">3</span><span class="unit">rem</span><span class="pun">);</span></span><span class="ln">  <span class="pun">}</span></span><span class="ln"><span class="pun">}</span></span><span class="ln"><span class="sel">.beta</span> <span class="pun">{</span> <span class="pun">opacity:</span> <span class="num">0.8</span><span class="pun">; }</span></span>`;
 
-const blockJson = `<span class="ln"><span class="pun">{</span></span><span class="ln">  <span class="jkey">"apiVersion"</span><span class="pun">:</span> <span class="num">3</span><span class="pun">,</span></span><span class="ln">  <span class="jkey">"name"</span><span class="pun">:</span> <span class="str">"lism-blocks/box"</span><span class="pun">,</span></span><span class="ln">  <span class="jkey">"keywords"</span><span class="pun">:</span> <span class="pun">[</span></span><span class="ln">    <span class="str">"group"</span></span><span class="ln">  <span class="pun">],</span></span><span class="ln">  <span class="jkey">"supports"</span><span class="pun">:</span> <span class="pun">{</span> <span class="pun">}</span></span><span class="ln"><span class="pun">}</span></span>`;
+const configTs = `<span class="ln"><span class="c">// dummy module</span></span><span class="ln"><span class="kw">import</span> <span class="pun">{</span> <span class="pun">foo</span> <span class="pun">}</span> <span class="kw">from</span> <span class="str">'./foo'</span><span class="pun">;</span></span><span class="ln"></span><span class="ln"><span class="kd">type</span> <span class="ty">Item</span> <span class="pun">= {</span></span><span class="ln">  <span class="pun">id:</span> <span class="ty">number</span><span class="pun">;</span></span><span class="ln">  <span class="pun">label:</span> <span class="ty">string</span><span class="pun">;</span></span><span class="ln"><span class="pun">};</span></span><span class="ln"></span><span class="ln"><span class="kd">const</span> <span class="pun">list:</span> <span class="ty">Item</span><span class="pun">[] = [];</span></span><span class="ln"><span class="kw">export</span> <span class="kd">const</span> <span class="fn">pick</span> <span class="pun">= (</span><span class="par">n</span><span class="pun">:</span> <span class="ty">number</span><span class="pun">):</span> <span class="ty">Item</span> <span class="pun">=&gt;</span> <span class="pun">list[n];</span></span><span class="ln"><span class="fn">foo</span><span class="pun">(</span>list<span class="pun">,</span> <span class="num">42</span><span class="pun">);</span></span>`;
+
+const widgetPhp = `<span class="ln"><span class="kw">&lt;?php</span></span><span class="ln"><span class="c">// dummy class</span></span><span class="ln"><span class="kw">namespace</span> <span class="ty">Demo\\Sample</span><span class="pun">;</span></span><span class="ln"></span><span class="ln"><span class="kd">class</span> <span class="ty">Widget</span> <span class="pun">{</span></span><span class="ln">  <span class="kw">public</span> <span class="ty">int</span> <span class="par">$count</span> <span class="pun">=</span> <span class="num">0</span><span class="pun">;</span></span><span class="ln"></span><span class="ln">  <span class="kw">public</span> <span class="kw">function</span> <span class="fn">render</span><span class="pun">(</span><span class="ty">string</span> <span class="par">$name</span><span class="pun">):</span> <span class="ty">string</span> <span class="pun">{</span></span><span class="ln">    <span class="kw">return</span> <span class="str">"Hello {$name}"</span><span class="pun">;</span></span><span class="ln">  <span class="pun">}</span></span><span class="ln"><span class="pun">}</span></span>`;
+
+const blockJson = `<span class="ln"><span class="pun">{</span></span><span class="ln">  <span class="jkey">"name"</span><span class="pun">:</span> <span class="str">"dummy"</span><span class="pun">,</span></span><span class="ln">  <span class="jkey">"version"</span><span class="pun">:</span> <span class="num">2</span><span class="pun">,</span></span><span class="ln">  <span class="jkey">"active"</span><span class="pun">:</span> <span class="num">true</span><span class="pun">,</span></span><span class="ln">  <span class="jkey">"tags"</span><span class="pun">:</span> <span class="pun">[</span><span class="str">"alpha"</span><span class="pun">,</span> <span class="str">"beta"</span><span class="pun">],</span></span><span class="ln">  <span class="jkey">"meta"</span><span class="pun">:</span> <span class="pun">{</span></span><span class="ln">    <span class="jkey">"count"</span><span class="pun">:</span> <span class="num">10</span><span class="pun">,</span></span><span class="ln">    <span class="jkey">"ratio"</span><span class="pun">:</span> <span class="num">0.5</span></span><span class="ln">  <span class="pun">},</span></span><span class="ln">  <span class="jkey">"items"</span><span class="pun">:</span> <span class="pun">[]</span></span><span class="ln"><span class="pun">}</span></span>`;
+
+const readmeMd = `<span class="ln"><span style="color:var(--green);font-weight:600"># Dummy Title</span></span><span class="ln"></span><span class="ln">Lorem ipsum <span style="color:var(--cyan);font-weight:600">**bold**</span>, <span style="color:var(--cyan);font-style:italic">*italic*</span>, <span style="color:var(--yellow)">~~strikethrough~~</span>, <span style="color:var(--orange)">\`code\`</span></span><span class="ln"></span><span class="ln"><span style="color:var(--yellow)">-</span> item one</span><span class="ln"><span style="color:var(--yellow)">-</span> item two</span><span class="ln"></span><span class="ln"><span style="color:var(--yellow)">&gt;</span> blockquote sample</span><span class="ln"></span><span class="ln"><span style="color:var(--cyan)">[link text]</span><span style="color:var(--purple)">(https://example.com)</span></span><span class="ln"><span style="color:var(--cyan)">![alt text]</span><span style="color:var(--purple)">(http://example.com/img.jpg)</span></span>`;
+
+// テキスト部分の半角スペースを中点(·)に置換し、Zed の whitespace 可視化を再現する。
+// タグ内（属性間など）のスペースは対象外。
+function ws(html: string): string {
+  let out = "";
+  let inTag = false;
+  for (const ch of html) {
+    if (ch === "<") inTag = true;
+    else if (ch === ">") inTag = false;
+    if (!inTag && ch === " ") {
+      out += '<span class="ws">·</span>';
+    } else {
+      out += ch;
+    }
+  }
+  return out;
+}
 ---
 
 <Section title="1. シンタックスコア" tag="Monokai キーカラー">
   <SwatchGrid items={syntaxCore} />
   <p class="note">
-    青イタリック <code>#3db1f5</code> のみ非 Monokai の独自追加（<code>keyword.declaration</code>・<code
-      >punctuation.special</code
-    >）。他は Monokai 純正。
+    青イタリック <code>#3db1f5</code> のみ非 Monokai の独自追加。他は Monokai 純正カラー。
   </p>
-  <div class="columns">
+  <div class="columns syntax-cols">
     <div>
-      <Editor file="block.js">
-        <pre set:html={blockJs}></pre>
+      <Editor file=".html">
+        <pre set:html={ws(indexHtml)} />
       </Editor>
-      <p class="note">青イタリック＝<code>keyword.declaration</code> / 緑＝関数名 / 紫＝<code>__</code>(定数扱い)</p>
     </div>
 
     <div>
-      <Editor file="style.scss">
-        <pre set:html={styleScss}></pre>
+      <Editor file=".scss">
+        <pre set:html={ws(styleScss)} />
       </Editor>
-      <p class="note">緑＝セレクタ / 赤＝<code>%</code>(単位) / 紫＝数値 / 白＝プロパティ名</p>
     </div>
 
     <div>
-      <Editor file="block.json">
-        <pre set:html={blockJson}></pre>
+      <Editor file=".ts">
+        <pre set:html={ws(configTs)} />
       </Editor>
-      <p class="note">水色＝JSON キー（<code>property.json_key</code>）/ 黄＝値 / 紫＝数値</p>
+    </div>
+
+    <div>
+      <Editor file=".php">
+        <pre set:html={ws(widgetPhp)} />
+      </Editor>
+    </div>
+
+    <div>
+      <Editor file=".json">
+        <pre set:html={ws(blockJson)} />
+      </Editor>
+    </div>
+
+    <div>
+      <Editor file=".md">
+        <pre set:html={ws(readmeMd)} />
+      </Editor>
     </div>
   </div>
 </Section>
+
+<style>
+  .syntax-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 720px) {
+    .syntax-cols {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
