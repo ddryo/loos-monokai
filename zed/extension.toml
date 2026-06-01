@@ -4,4 +4,4 @@ version = "0.1.0"
 schema_version = 1
 authors = ["ddryo <loos.webstudio@gmail.com>"]
 description = "A customized Monokai theme for Zed — refined syntax, diff, diagnostics and terminal colors."
-repository = "https://github.com/ddryo/zed-loos-monokai"
+repository = "https://github.com/ddryo/loos-monokai"

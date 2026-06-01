@@ -117,6 +117,26 @@
             "cursor": "#f8f8f0",
             "background": "#f8f8f0",
             "selection": "#878b9180"
+          },
+          {
+            "cursor": "#9ed72b",
+            "background": "#9ed72b",
+            "selection": "#9ed72b3d"
+          },
+          {
+            "cursor": "#60d6ec",
+            "background": "#60d6ec",
+            "selection": "#60d6ec3d"
+          },
+          {
+            "cursor": "#b389ff",
+            "background": "#b389ff",
+            "selection": "#b389ff3d"
+          },
+          {
+            "cursor": "#fc2f78",
+            "background": "#fc2f78",
+            "selection": "#fc2f783d"
           }
         ],
         "syntax": {
