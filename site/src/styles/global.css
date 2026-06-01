@@ -1,14 +1,18 @@
 :root {
-  /* editor chrome */
-  --bg: #272822;
-  --bg-dark: #1e1f1c;
-  --surface: #414339;
-  --line: #3e3d32;
-  --brown: #75715e;
+  /* ===== 背景トーン（chrome）===== */
+  --page: #1a1b16; /* ページ地（サイト専用・テーマ外。editor より一段暗く） */
+  --bg: #23241f; /* editor / gutter / terminal / アクティブタブ */
+  --chrome: #292a26; /* サイドバー / タブ溝 / パネル / ポップアップ地 */
+  --bar: #30312e; /* タイトルバー / ステータスバー */
+  --surface: #414339; /* border / 選択・アクティブ面 */
+  --line: #3e3d32; /* 行ハイライト / hover行 */
+  --brown: #75715e; /* focus枠 / hint / placeholder */
   --comment: #949181;
-  --linenum: #90908a;
+  --linenum: #90908a; /* 行番号 / muted文字 */
   --invisible: #50504a;
-  /* core syntax */
+  --wrap-guide: #464741;
+  --cursor: #f8f8f0;
+  /* ===== コアシンタックス ===== */
   --red: #f92672;
   --green: #a6e22e;
   --cyan: #66d9ef;
@@ -16,17 +20,45 @@
   --orange: #fd971f;
   --yellow: #e6db74;
   --fg: #f8f8f2;
-  /* custom */
-  --blue: #3db1f5;
+  /* custom（非 Monokai） */
+  --blue: #2689f2;
   --blue3: #819aff;
   --byellow: #e2e22e;
+  /* ===== 選択・ハイライト（α フィル）===== */
+  --hl-write: #788d8750; /* document_highlight.write */
+  --hl-read: #788d8750; /* document_highlight.read */
+  --hl-sel: #878b9180; /* editor.selection */
+  --hl-find: #92926270; /* search.match */
+  --hover-fill: #41433988; /* element.hover（α） */
+  /* ===== diff（フィル）===== */
+  --add-bg: #63862130; /* created.background */
+  --add-bg-strong: #6386214d; /* 追加 word-diff */
+  --del-bg: #90274a30; /* deleted.background */
+  --del-bg-strong: #90274a66; /* 削除 word-diff */
+  --mod-bg: #66852840; /* modified.background */
+  --hunk-bg: #292a2666; /* ハンクヘッダ地（chrome α） */
+  /* ===== 診断（地 α10% + アクセント文字）===== */
+  --err-bg: #b12f5b1a;
+  --warn-bg: #8485281a;
+  --info-bg: #3c708c1a;
+  --err-fg: #ffb3cd;
+  --warn-fg: #f3f3a0;
+  --info-fg: #bfe4fb;
+  /* ===== ターミナル ANSI（normal）。bright 系は core を再利用 ===== */
+  --ansi-red: #c4265e;
+  --ansi-green: #86b42b;
+  --ansi-yellow: #b3b42b;
+  --ansi-blue: #6a7ec8;
+  --ansi-magenta: #8c6bc8;
+  --ansi-cyan: #56adbc;
+  --ansi-br-black: #666666;
 }
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
-  background: var(--bg-dark);
+  background: var(--page);
   color: var(--fg);
   font-family:
     -apple-system, "Hiragino Sans", "Helvetica Neue", Arial, sans-serif;
@@ -57,7 +89,7 @@ h2 {
 h2 .tag {
   font-size: 11px;
   font-weight: 600;
-  color: var(--bg-dark);
+  color: var(--bg);
   background: var(--brown);
   padding: 2px 8px;
   border-radius: 4px;
@@ -115,7 +147,7 @@ h2 .tag.custom {
   margin: 18px 0;
 }
 .editor .titlebar {
-  background: var(--bg-dark);
+  background: var(--bar);
   padding: 8px 14px;
   font-size: 12px;
   color: var(--linenum);
@@ -164,7 +196,7 @@ pre .ln::before {
   color: var(--red);
 }
 .kd {
-  color: var(--blue);
+  color: var(--cyan);
   font-style: italic;
 } /* keyword.declaration */
 .str {
@@ -177,7 +209,7 @@ pre .ln::before {
   color: var(--cyan);
 }
 .ty {
-  color: var(--cyan);
+  color: var(--green);
   font-style: italic;
 }
 .par {
@@ -198,6 +230,9 @@ pre .ln::before {
 }
 .pun {
   color: var(--fg);
+}
+.ps {
+  color: var(--blue);
 }
 .tmpl {
   color: var(--blue);
@@ -244,28 +279,28 @@ pre.term {
   background: var(--bg);
 }
 .t-fg {
-  color: #f8f8f2;
+  color: var(--fg);
 }
 .t-red {
-  color: #c4265e;
+  color: var(--ansi-red);
 }
 .t-grn {
-  color: #86b42b;
+  color: var(--ansi-green);
 }
 .t-yel {
-  color: #b3b42b;
+  color: var(--ansi-yellow);
 }
 .t-blu {
-  color: #6a7ec8;
+  color: var(--ansi-blue);
 }
 .t-mag {
-  color: #8c6bc8;
+  color: var(--ansi-magenta);
 }
 .t-cyn {
-  color: #56adbc;
+  color: var(--ansi-cyan);
 }
 .cursor {
-  color: #f8f8f0;
+  color: var(--cursor);
   animation: blink 1s step-end infinite;
 }
 @keyframes blink {
@@ -274,35 +309,35 @@ pre.term {
   }
 }
 pre.term .t-pur {
-  color: #8c6bc8;
+  color: var(--ansi-magenta);
 }
 /* bright */
 .b-red {
-  color: #f92672;
+  color: var(--red);
 }
 .b-grn {
-  color: #a6e22e;
+  color: var(--green);
 }
 .b-yel {
-  color: #e2e22e;
+  color: var(--byellow);
 }
 .b-blu {
-  color: #819aff;
+  color: var(--blue3);
 }
 .b-mag {
-  color: #ae81ff;
+  color: var(--purple);
 }
 .b-cyn {
-  color: #66d9ef;
+  color: var(--cyan);
 }
 .b-wht {
-  color: #f8f8f2;
+  color: var(--fg);
 }
 .b-blk {
-  color: #666666;
+  color: var(--ansi-br-black);
 }
 .t-dim {
-  color: #75715e;
+  color: var(--brown);
 }
 /* ===== chrome mockup (Zed UI) ===== */
 .zed {
@@ -312,7 +347,7 @@ pre.term .t-pur {
   grid-template-rows: 34px 1fr 26px;
   grid-template-areas: "title title" "side main" "status status";
   height: 440px;
-  border: 1px solid #75715e;
+  border: 1px solid var(--surface);
   border-radius: 10px;
   overflow: hidden;
   font-size: 12px;
@@ -320,12 +355,13 @@ pre.term .t-pur {
 }
 .zed .z-title {
   grid-area: title;
-  background: #1e1f1c;
+  background: var(--bar);
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 0 12px;
-  color: #90908a;
+  color: var(--linenum);
+  border-bottom: 1px solid var(--surface);
 }
 .zed .z-title .dot {
   width: 11px;
@@ -335,14 +371,14 @@ pre.term .t-pur {
 }
 .zed .z-side {
   grid-area: side;
-  background: #1e1f1c;
+  background: var(--chrome);
   padding: 6px 0;
-  border-right: 1px solid #414339;
+  border-right: 1px solid var(--surface);
   overflow: hidden;
 }
 .zed .z-main {
   grid-area: main;
-  background: #272822;
+  background: var(--bg);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -350,17 +386,18 @@ pre.term .t-pur {
 }
 .zed .z-status {
   grid-area: status;
-  background: #414339;
+  background: var(--bar);
   display: flex;
   align-items: center;
   gap: 16px;
   padding: 0 12px;
-  color: #f8f8f2;
+  color: var(--fg);
   font-size: 11px;
+  border-top: 1px solid var(--surface);
 }
 .z-row {
   padding: 3px 12px 3px 28px;
-  color: #f8f8f2;
+  color: var(--fg);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -376,36 +413,47 @@ pre.term .t-pur {
   padding-left: 46px;
 }
 .z-row.sel {
-  background: #414339;
+  background: var(--surface);
 }
 .z-row.hov {
-  background: #3e3d32;
+  background: var(--line);
 }
 .z-row .muted {
-  color: #90908a;
+  color: var(--linenum);
 }
 .z-tabs {
   display: flex;
-  align-items: center;
-  background: #1e1f1c;
+  align-items: stretch;
+  background: var(--chrome);
   flex: none;
+  /* タブ列の下端ボーダー。Zed の border (#414339 = var(--surface)) に合わせる */
+  border-bottom: 1px solid var(--surface);
 }
 .z-nav {
+  display: flex;
+  align-items: center;
   padding: 0 12px;
-  color: #75715e;
+  color: var(--brown);
   letter-spacing: 1px;
 }
 .z-tab {
+  display: flex;
+  align-items: center;
   padding: 7px 14px;
-  color: #90908a;
-  /* テーマの tab.inactive_background（#414339）に忠実 */
-  background: #414339;
-  border-right: 1px solid #272822;
+  color: var(--linenum);
+  /* テーマの tab.inactive_background（var(--chrome)）に忠実 */
+  background: var(--chrome);
   white-space: nowrap;
 }
+/* アクティブタブは左右をボーダーで囲み、下端を背景色で塗りつぶして
+   タブ列の下端ボーダーを途切れさせ、エディタ領域と地続きに見せる（Zed のタブ表現） */
 .z-tab.active {
-  background: #272822;
-  color: #f8f8f2;
+  background: var(--bg);
+  color: var(--fg);
+  border-left: 1px solid var(--surface);
+  border-right: 1px solid var(--surface);
+  margin-bottom: -1px;
+  border-bottom: 1px solid var(--bg);
 }
 /* ブレッドクラム（シンボルパス）— Zed のツールバー行 */
 .z-bread {
@@ -414,16 +462,16 @@ pre.term .t-pur {
   align-items: center;
   gap: 7px;
   padding: 5px 14px;
-  background: #272822;
-  border-bottom: 1px solid #1e1f1c;
+  background: var(--bg);
+  border-bottom: 1px solid var(--surface);
   font-family: "SF Mono", Menlo, monospace;
   font-size: 11px;
 }
 .z-bread .crumb {
-  color: #90908a;
+  color: var(--linenum);
 }
 .z-bread .sep {
-  color: #75715e;
+  color: var(--brown);
 }
 .z-edit {
   flex: 1;
@@ -433,8 +481,8 @@ pre.term .t-pur {
 }
 .z-gutter {
   padding: 8px 0;
-  color: #90908a;
-  background: #272822;
+  color: var(--linenum);
+  background: var(--bg);
   text-align: right;
   user-select: none;
   font-family: "SF Mono", Menlo, monospace;
@@ -445,7 +493,7 @@ pre.term .t-pur {
   line-height: 1.6;
 }
 .z-gutter .cur {
-  color: #f8f8f2;
+  color: var(--fg);
 }
 .z-code {
   padding: 8px 0;
@@ -460,25 +508,25 @@ pre.term .t-pur {
   padding: 0 12px;
 }
 .z-code .l.active {
-  background: #3e3d32;
+  background: var(--line);
 }
-/* シグネチャヘルプのポップアップ。アクティブ行（5行目）の下側に出す。背景は elevated_surface (#1e1f1c) */
+/* シグネチャヘルプのポップアップ。アクティブ行（5行目）の下側に出す。背景は elevated_surface (var(--chrome)) */
 .z-pop {
   position: absolute;
   left: 40px;
   top: 112px;
   padding: 8px 14px;
-  background: #1e1f1c;
-  border: 1px solid #414339;
+  background: var(--chrome);
+  border: 1px solid var(--surface);
   border-radius: 6px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
   font-family: "SF Mono", Menlo, monospace;
   font-size: 12px;
-  color: #f8f8f2;
+  color: var(--fg);
   white-space: nowrap;
 }
 .z-hover {
-  background: #41433988;
+  background: var(--hover-fill);
   border-radius: 2px;
 }
 .legend {
@@ -498,7 +546,7 @@ pre.term .t-pur {
   width: 26px;
   height: 14px;
   border-radius: 3px;
-  border: 1px solid #414339;
+  border: 1px solid var(--surface);
   flex: none;
 }
 .legend .hx {
@@ -508,8 +556,8 @@ pre.term .t-pur {
 }
 /* ===== git diff ===== */
 .diff {
-  background: #272822;
-  border: 1px solid #414339;
+  background: var(--bg);
+  border: 1px solid var(--surface);
   border-radius: 10px;
   overflow: hidden;
   max-width: 760px;
@@ -518,24 +566,24 @@ pre.term .t-pur {
   font-size: 12.5px;
 }
 .diff .dh {
-  background: #1e1f1c;
+  background: var(--chrome);
   padding: 8px 12px;
-  color: #90908a;
-  border-bottom: 1px solid #414339;
+  color: var(--linenum);
+  border-bottom: 1px solid var(--surface);
   display: flex;
   gap: 10px;
   align-items: center;
 }
 .diff .dh .stat-add {
-  color: #a6e22e;
+  color: var(--green);
 }
 .diff .dh .stat-del {
-  color: #f92672;
+  color: var(--red);
 }
 .diff .dhunk {
-  color: #75715e;
+  color: var(--brown);
   padding: 4px 12px;
-  background: #1e1f1c66;
+  background: var(--hunk-bg);
 }
 .diff .dl {
   display: flex;
@@ -544,13 +592,13 @@ pre.term .t-pur {
   border-left: 3px solid transparent;
 }
 .diff .dl.bar-mod {
-  border-left-color: #e6db74;
+  border-left-color: var(--yellow);
 } /* modified hunk = 黄 */
 .diff .dl.bar-add {
-  border-left-color: #a6e22e;
+  border-left-color: var(--green);
 } /* pure add = 緑 */
 .diff .dl.bar-del {
-  border-left-color: #f92672;
+  border-left-color: var(--red);
 } /* pure delete = ピンク */
 .diff .dl .go {
   display: none;
@@ -559,7 +607,7 @@ pre.term .t-pur {
   width: 3em;
   text-align: right;
   padding: 0 6px;
-  color: #90908a;
+  color: var(--linenum);
   user-select: none;
   flex: none;
 }
@@ -571,31 +619,31 @@ pre.term .t-pur {
   padding-right: 12px;
 }
 .diff .add {
-  background: #63862130;
+  background: var(--add-bg);
 }
 .diff .add .sg {
-  color: #a6e22e;
+  color: var(--green);
 }
 .diff .del {
-  background: #90274a30;
+  background: var(--del-bg);
 }
 .diff .del .sg {
-  color: #f92672;
+  color: var(--red);
 }
 .diff .w-add {
-  background: #6386214d;
+  background: var(--add-bg-strong);
   border-radius: 2px;
 }
 .diff .w-del {
-  background: #90274a66;
+  background: var(--del-bg-strong);
   border-radius: 2px;
 }
 .diff .sub {
   padding: 5px 12px;
   font-size: 11px;
-  color: #90908a;
-  background: #1e1f1c;
-  border-top: 1px solid #414339;
+  color: var(--linenum);
+  background: var(--chrome);
+  border-top: 1px solid var(--surface);
 }
 /* split */
 .diff-split {
@@ -606,7 +654,7 @@ pre.term .t-pur {
 .diff-split .side {
   flex: 1;
   min-width: 0;
-  border-right: 1px solid #414339;
+  border-right: 1px solid var(--surface);
 }
 .diff-split .side:last-child {
   border-right: 0;
@@ -620,21 +668,21 @@ pre.term .t-pur {
   width: 2.8em;
   text-align: right;
   padding: 0 6px;
-  color: #90908a;
+  color: var(--linenum);
   flex: none;
   border-left: 3px solid transparent;
 }
 .ds-l.add .n {
-  border-left-color: #a6e22e;
+  border-left-color: var(--green);
 }
 .ds-l.del .n {
-  border-left-color: #f92672;
+  border-left-color: var(--red);
 }
 .ds-l.add {
-  background: #63862130;
+  background: var(--add-bg);
 }
 .ds-l.del {
-  background: #90274a30;
+  background: var(--del-bg);
 }
 .ds-l.hatch {
   background-image: repeating-linear-gradient(
@@ -650,19 +698,19 @@ pre.term .t-pur {
 }
 /* ===== selection / highlight (§3 dedicated) ===== */
 .hl-write {
-  background: #6a6a9680;
+  background: var(--hl-write);
   border-radius: 2px;
 } /* document_highlight.write */
 .hl-read {
-  background: #4a4a7680;
+  background: var(--hl-read);
   border-radius: 2px;
 } /* document_highlight.read */
 .hl-sel {
-  background: #878b9180;
+  background: var(--hl-sel);
   border-radius: 2px;
 } /* editor.selection */
 .hl-find {
-  background: #75715e80;
+  background: var(--hl-find);
   border-radius: 2px;
 } /* search.match */
 /* ===== diagnostics ===== */
@@ -682,13 +730,13 @@ pre.term .t-pur {
   text-underline-offset: 3px;
 }
 .sq-err {
-  text-decoration-color: #f92672;
+  text-decoration-color: var(--red);
 }
 .sq-warn {
-  text-decoration-color: #e2e22e;
+  text-decoration-color: var(--byellow);
 }
 .sq-info {
-  text-decoration-color: #3db1f5;
+  text-decoration-color: var(--blue);
 }
 .diag-pop {
   margin: 4px 18px 18px;
@@ -715,29 +763,29 @@ pre.term .t-pur {
   text-decoration: underline;
 }
 .diag-pop.err {
-  background: #b12f5b1a;
-  border-color: #f92672;
-  color: #f8f8f2;
+  background: var(--err-bg);
+  border-color: var(--red);
+  color: var(--fg);
 }
 .diag-pop.warn {
-  background: #8485281a;
-  border-color: #e2e22e;
-  color: #f8f8f2;
+  background: var(--warn-bg);
+  border-color: var(--byellow);
+  color: var(--fg);
 }
 .diag-pop.info {
-  background: #3c708c1a;
-  border-color: #3db1f5;
-  color: #f8f8f2;
+  background: var(--info-bg);
+  border-color: var(--blue);
+  color: var(--fg);
 }
 .diag-pop.err .sev,
 .diag-pop.err .src {
-  color: #ffb3cd;
+  color: var(--err-fg);
 }
 .diag-pop.warn .sev,
 .diag-pop.warn .src {
-  color: #f3f3a0;
+  color: var(--warn-fg);
 }
 .diag-pop.info .sev,
 .diag-pop.info .src {
-  color: #bfe4fb;
+  color: var(--info-fg);
 }

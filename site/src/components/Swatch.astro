@@ -1,10 +1,11 @@
 ---
 interface Props {
   hex: string;
+  cssVar: `--${string}`;
   role: string;
 }
 
-const { hex, role } = Astro.props;
+const { hex, cssVar, role } = Astro.props;
 
 // #RRGGBBAA（9文字）のときは末尾アルファだけグレー表示にして、
 // 不透明色との違いをひと目で分かるようにする。
@@ -14,7 +15,7 @@ const alpha = isAlpha ? hex.slice(7) : "";
 ---
 
 <div class="swatch">
-  <div class="chip"><span style={`background:${hex}`}></span></div>
+  <div class="chip"><span style={`background:var(${cssVar})`}></span></div>
   <div class="meta">
     <div class="hex">{base}{alpha && <span class="alpha">{alpha}</span>}</div>
     <div class="role">{role}</div>

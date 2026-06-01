@@ -24,24 +24,24 @@ const diagInfo = `<div class="diag-code"><span class="kw sq-info">await</span> <
   </p>
   <div class="columns">
     <div>
-      <Editor file="config.ts" badge="✗ 1" badgeColor="#f92672">
+      <Editor file="config.ts" badge="✗ 1" badgeColor="var(--red)">
         <Fragment set:html={diagErr} />
       </Editor>
       <p class="note">error: 文字/枠 <code>#f92672</code> ＋ 下地 <code>#b12f5b1a</code></p>
     </div>
 
     <div>
-      <Editor file="Card.jsx" badge="⚠ 1" badgeColor="#e2e22e">
+      <Editor file="Card.jsx" badge="⚠ 1" badgeColor="var(--byellow)">
         <Fragment set:html={diagWarn} />
       </Editor>
       <p class="note">warning: 文字/枠 <code>#e2e22e</code> ＋ 下地 <code>#8485281a</code>（スクショのこれ）</p>
     </div>
 
     <div>
-      <Editor file="fetch.ts" badge="ℹ 1" badgeColor="#3db1f5">
+      <Editor file="fetch.ts" badge="ℹ 1" badgeColor="var(--blue)">
         <Fragment set:html={diagInfo} />
       </Editor>
-      <p class="note">info: 文字/枠 <code>#3db1f5</code> ＋ 下地 <code>#3c708c1a</code></p>
+      <p class="note">info: 文字/枠 <code>#2689f2</code> ＋ 下地 <code>#3c708c1a</code></p>
     </div>
   </div>
   <p class="note" style="margin-top:10px;">

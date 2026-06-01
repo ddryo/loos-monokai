@@ -10,5 +10,5 @@ const { items } = Astro.props;
 ---
 
 <div class="grid">
-  {items.map((s) => <Swatch hex={s.hex} role={s.role} />)}
+  {items.map((s) => <Swatch hex={s.hex} cssVar={s.cssVar} role={s.role} />)}
 </div>

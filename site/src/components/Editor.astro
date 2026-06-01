@@ -15,9 +15,9 @@ const { file, badge, badgeColor, maxWidth } = Astro.props;
 
 <div class="editor" style={maxWidth ? `max-width:${maxWidth}` : undefined}>
   <div class="titlebar">
-    <span class="dot" style="background:#f92672"></span>
-    <span class="dot" style="background:#e6db74"></span>
-    <span class="dot" style="background:#a6e22e"></span>
+    <span class="dot" style="background:var(--red)"></span>
+    <span class="dot" style="background:var(--yellow)"></span>
+    <span class="dot" style="background:var(--green)"></span>
     <span style="margin-left:2px">{file}</span>
     {badge && <span style={`color:${badgeColor};margin-left:6px;`}>{badge}</span>}
   </div>

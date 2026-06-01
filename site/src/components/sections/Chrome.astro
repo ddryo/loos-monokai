@@ -6,7 +6,7 @@ import { chrome } from "../../data/palette";
 // Zed の UI クローム全体を再現したモックアップ。波括弧を含むコード行があるため set:html で出力する。
 // 中身はパレット確認用の汎用ダミー（app.js を開いた状態）。シグネチャ用ポップアップは下側に出す。
 const zedMockup = `<div class="z-title">
-  <span class="dot" style="background:#f92672"></span><span class="dot" style="background:#e6db74"></span><span class="dot" style="background:#a6e22e"></span>
+  <span class="dot" style="background:var(--red)"></span><span class="dot" style="background:var(--yellow)"></span><span class="dot" style="background:var(--green)"></span>
   <span style="margin-left:6px;">project-name</span>
 </div>
 <div class="z-side">
@@ -36,9 +36,9 @@ const zedMockup = `<div class="z-title">
   </div>
 </div>
 <div class="z-status">
-  <span style="margin-left:auto; color:#90908a;">5:1</span>
-  <span style="color:#90908a;">JavaScript</span>
-  <span style="color:#90908a;">□</span>
+  <span style="margin-left:auto; color:var(--linenum);">5:1</span>
+  <span style="color:var(--linenum);">JavaScript</span>
+  <span style="color:var(--linenum);">□</span>
 </div>`;
 ---
 

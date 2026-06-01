@@ -4,63 +4,65 @@
 export interface Swatch {
   /** #RRGGBB または #RRGGBBAA（末尾アルファは UI 上グレー表示される） */
   hex: string;
+  /** チップの背景色に使う CSS 変数名 */
+  cssVar: `--${string}`;
   /** その色が担う役割の説明 */
   role: string;
 }
 
 /** 1. シンタックスコア（Monokai キーカラー） */
 export const syntaxCore: Swatch[] = [
-  { hex: "#f92672", role: "keyword / operator / tag" },
-  { hex: "#a6e22e", role: "type / class / attribute / selector" },
-  { hex: "#66d9ef", role: "function / json_key" },
-  { hex: "#ae81ff", role: "number / constant / boolean" },
-  { hex: "#fd971f", role: "parameter / this" },
-  { hex: "#e6db74", role: "string" },
-  { hex: "#f8f8f2", role: "fg — text / variable / punctuation" },
-  { hex: "#949181", role: "comment" },
-  { hex: "#3db1f5", role: "keyword.declaration / punctuation.special（独自）" },
+  { hex: "#f92672", cssVar: "--red", role: "keyword / operator / tag" },
+  { hex: "#a6e22e", cssVar: "--green", role: "type / class / attribute / selector" },
+  { hex: "#66d9ef", cssVar: "--cyan", role: "function / json_key / declaration" },
+  { hex: "#ae81ff", cssVar: "--purple", role: "number / constant / boolean" },
+  { hex: "#fd971f", cssVar: "--orange", role: "parameter / this" },
+  { hex: "#e6db74", cssVar: "--yellow", role: "string" },
+  { hex: "#f8f8f2", cssVar: "--fg", role: "fg — text / variable / punctuation" },
+  { hex: "#949181", cssVar: "--comment", role: "comment" },
+  { hex: "#2689f2", cssVar: "--blue", role: "punctuation.special / info（独自）" },
 ];
 
 /** 2. 背景・UI クローム（純正） */
 export const chrome: Swatch[] = [
-  { hex: "#272822", role: "editor bg" },
-  { hex: "#1e1f1c", role: "sidebar / タブ溝 / ポップアップ地 / 境界" },
-  { hex: "#414339", role: "surface / 選択面 / ステータスバー" },
-  { hex: "#3e3d32", role: "行ハイライト / hover行" },
-  { hex: "#75715e", role: "focus枠" },
-  { hex: "#90908a", role: "行番号 / muted文字" },
-  { hex: "#464741", role: "不可視文字 / wrap guide" },
-  { hex: "#f8f8f0", role: "cursor" },
+  { hex: "#23241f", cssVar: "--bg", role: "editor / gutter / terminal / アクティブタブ" },
+  { hex: "#292a26", cssVar: "--chrome", role: "サイドバー / タブ溝 / パネル / ポップアップ地" },
+  { hex: "#30312e", cssVar: "--bar", role: "タイトルバー / ステータスバー" },
+  { hex: "#414339", cssVar: "--surface", role: "border / 選択・アクティブ面" },
+  { hex: "#3e3d32", cssVar: "--line", role: "行ハイライト / hover行" },
+  { hex: "#75715e", cssVar: "--brown", role: "focus枠" },
+  { hex: "#90908a", cssVar: "--linenum", role: "行番号 / muted文字" },
+  { hex: "#464741", cssVar: "--wrap-guide", role: "不可視文字 / wrap guide" },
+  { hex: "#f8f8f0", cssVar: "--cursor", role: "cursor" },
 ];
 
 /** 3. 選択・ハイライト（背景フィル） */
 export const highlight: Swatch[] = [
-  { hex: "#6a6a9680", role: "document_highlight write（宣言・代入）" },
-  { hex: "#4a4a7680", role: "document_highlight read（参照）" },
-  { hex: "#878b9180", role: "selection（テキスト選択）" },
-  { hex: "#75715e80", role: "search.match（検索一致）" },
+  { hex: "#788d8750", cssVar: "--hl-write", role: "document_highlight write/read（宣言・参照）" },
+  { hex: "#878b9180", cssVar: "--hl-sel", role: "selection（テキスト選択）" },
+  { hex: "#92926270", cssVar: "--hl-find", role: "search.match（検索一致）" },
 ];
 
 /** 4. diff 系（Git） */
 export const diff: Swatch[] = [
-  { hex: "#a6e22e", role: "created — 追加（文字 / ガター）" },
-  { hex: "#63862130", role: "created.background — 追加行の下地" },
-  { hex: "#f92672", role: "deleted — 削除（文字 / ガター）" },
-  { hex: "#90274a30", role: "deleted.background — 削除行の下地" },
-  { hex: "#e6db74", role: "modified — 変更（Unified 縦バー）" },
-  { hex: "#66852840", role: "modified.background" },
-  { hex: "#fd971f", role: "conflict — コンフリクト" },
-  { hex: "#66d9ef", role: "renamed — リネーム" },
+  { hex: "#a6e22e", cssVar: "--green", role: "created — 追加（文字 / ガター）" },
+  { hex: "#63862130", cssVar: "--add-bg", role: "created.background — 追加行の下地" },
+  { hex: "#f92672", cssVar: "--red", role: "deleted — 削除（文字 / ガター）" },
+  { hex: "#90274a30", cssVar: "--del-bg", role: "deleted.background — 削除行の下地" },
+  { hex: "#e6db74", cssVar: "--yellow", role: "modified — 変更（Unified 縦バー）" },
+  { hex: "#66852840", cssVar: "--mod-bg", role: "modified.background" },
+  { hex: "#fd971f", cssVar: "--orange", role: "conflict — コンフリクト" },
+  { hex: "#66d9ef", cssVar: "--cyan", role: "renamed — リネーム" },
 ];
 
 /** 5. 診断ポップアップ（独自背景） */
 export const diagnostics: Swatch[] = [
-  { hex: "#f92672", role: "error — 文字 / 枠（＝base）" },
-  { hex: "#b12f5b1a", role: "error.background — 下地（独自・α10%）" },
-  { hex: "#e2e22e", role: "warning — 文字 / 枠（＝base）" },
-  { hex: "#8485281a", role: "warning.background — 下地（独自・α10%）" },
-  { hex: "#3db1f5", role: "info — 文字 / 枠（＝§1 blue）" },
-  { hex: "#3c708c1a", role: "info.background — 下地（独自・α10%）" },
+  { hex: "#f92672", cssVar: "--red", role: "error — 文字 / 枠（＝base）" },
+  { hex: "#b12f5b1a", cssVar: "--err-bg", role: "error.background — 下地（独自・α10%）" },
+  { hex: "#e2e22e", cssVar: "--byellow", role: "warning — 文字 / 枠（＝base）" },
+  { hex: "#8485281a", cssVar: "--warn-bg", role: "warning.background — 下地（独自・α10%）" },
+  { hex: "#2689f2", cssVar: "--blue", role: "info — 文字 / 枠（＝§1 blue）" },
+  { hex: "#3c708c1a", cssVar: "--info-bg", role: "info.background — 下地（独自・α10%）" },
 ];
 
 export interface AnsiColor {

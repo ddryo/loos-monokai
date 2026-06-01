@@ -1,0 +1,11 @@
+{
+  "name": "dummy",
+  "version": 2,
+  "active": true,
+  "tags": ["alpha", "beta"],
+  "meta": {
+    "count": 10,
+    "ratio": 0.5
+  },
+  "items": []
+}
