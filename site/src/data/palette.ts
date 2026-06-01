@@ -12,15 +12,15 @@ export interface Swatch {
 
 /** 1. シンタックスコア（Monokai キーカラー） */
 export const syntaxCore: Swatch[] = [
-  { hex: "#f92672", cssVar: "--red", role: "keyword / operator / tag" },
-  { hex: "#a6e22e", cssVar: "--green", role: "type / class / attribute / selector" },
-  { hex: "#66d9ef", cssVar: "--cyan", role: "function / json_key / declaration" },
-  { hex: "#ae81ff", cssVar: "--purple", role: "number / constant / boolean" },
-  { hex: "#fd971f", cssVar: "--orange", role: "parameter / this" },
-  { hex: "#e6db74", cssVar: "--yellow", role: "string" },
-  { hex: "#f8f8f2", cssVar: "--fg", role: "fg — text / variable / punctuation" },
+  { hex: "#fc2f78", cssVar: "--red", role: "keyword / operator / tag" },
+  { hex: "#9ed72b", cssVar: "--green", role: "type / class / attribute / selector" },
+  { hex: "#60d6ec", cssVar: "--cyan", role: "function / json_key / declaration" },
+  { hex: "#b389ff", cssVar: "--purple", role: "number / constant / boolean" },
+  { hex: "#ff9f2f", cssVar: "--orange", role: "parameter / this" },
+  { hex: "#e4d971", cssVar: "--yellow", role: "string" },
+  { hex: "#f4f4ec", cssVar: "--fg", role: "fg — text / variable / punctuation" },
   { hex: "#949181", cssVar: "--comment", role: "comment" },
-  { hex: "#2689f2", cssVar: "--blue", role: "punctuation.special / info（独自）" },
+  { hex: "#4197f1", cssVar: "--blue", role: "punctuation.special / info（独自）" },
 ];
 
 /** 2. 背景・UI クローム（純正） */
@@ -45,23 +45,23 @@ export const highlight: Swatch[] = [
 
 /** 4. diff 系（Git） */
 export const diff: Swatch[] = [
-  { hex: "#a6e22e", cssVar: "--green", role: "created — 追加（文字 / ガター）" },
+  { hex: "#9ed72b", cssVar: "--green", role: "created — 追加（文字 / ガター）" },
   { hex: "#63862130", cssVar: "--add-bg", role: "created.background — 追加行の下地" },
-  { hex: "#f92672", cssVar: "--red", role: "deleted — 削除（文字 / ガター）" },
+  { hex: "#fc2f78", cssVar: "--red", role: "deleted — 削除（文字 / ガター）" },
   { hex: "#90274a30", cssVar: "--del-bg", role: "deleted.background — 削除行の下地" },
-  { hex: "#e6db74", cssVar: "--yellow", role: "modified — 変更（Unified 縦バー）" },
+  { hex: "#e4d971", cssVar: "--yellow", role: "modified — 変更（Unified 縦バー）" },
   { hex: "#66852840", cssVar: "--mod-bg", role: "modified.background" },
-  { hex: "#fd971f", cssVar: "--orange", role: "conflict — コンフリクト" },
-  { hex: "#66d9ef", cssVar: "--cyan", role: "renamed — リネーム" },
+  { hex: "#ff9f2f", cssVar: "--orange", role: "conflict — コンフリクト" },
+  { hex: "#60d6ec", cssVar: "--cyan", role: "renamed — リネーム" },
 ];
 
 /** 5. 診断ポップアップ（独自背景） */
 export const diagnostics: Swatch[] = [
-  { hex: "#f92672", cssVar: "--red", role: "error — 文字 / 枠（＝base）" },
+  { hex: "#fc2f78", cssVar: "--red", role: "error — 文字 / 枠（＝base）" },
   { hex: "#b12f5b1a", cssVar: "--err-bg", role: "error.background — 下地（独自・α10%）" },
-  { hex: "#e2e22e", cssVar: "--byellow", role: "warning — 文字 / 枠（＝base）" },
+  { hex: "#e4d971", cssVar: "--byellow", role: "warning — 文字 / 枠（＝base）" },
   { hex: "#8485281a", cssVar: "--warn-bg", role: "warning.background — 下地（独自・α10%）" },
-  { hex: "#2689f2", cssVar: "--blue", role: "info — 文字 / 枠（＝§1 blue）" },
+  { hex: "#4197f1", cssVar: "--blue", role: "info — 文字 / 枠（＝§1 blue）" },
   { hex: "#3c708c1a", cssVar: "--info-bg", role: "info.background — 下地（独自・α10%）" },
 ];
 
@@ -72,20 +72,20 @@ export interface AnsiColor {
 
 /** 6. ターミナル ANSI（前半8色 normal / 後半8色 bright） */
 export const ansiColors: AnsiColor[] = [
-  { name: "black", hex: "#333333" },
-  { name: "red", hex: "#c4265e" },
-  { name: "green", hex: "#86b42b" },
-  { name: "yellow", hex: "#b3b42b" },
-  { name: "blue", hex: "#6a7ec8" },
-  { name: "magenta", hex: "#8c6bc8" },
-  { name: "cyan", hex: "#56adbc" },
-  { name: "white", hex: "#e3e3dd" },
+  { name: "black", hex: "#666666" },
+  { name: "red", hex: "#fc2f78" },
+  { name: "green", hex: "#9ed72b" },
+  { name: "yellow", hex: "#e4d971" },
+  { name: "blue", hex: "#4197f1" },
+  { name: "magenta", hex: "#b389ff" },
+  { name: "cyan", hex: "#60d6ec" },
+  { name: "white", hex: "#f4f4ec" },
   { name: "br.black", hex: "#666666" },
-  { name: "br.red", hex: "#f92672" },
-  { name: "br.green", hex: "#a6e22e" },
-  { name: "br.yellow", hex: "#e2e22e" },
-  { name: "br.blue", hex: "#819aff" },
-  { name: "br.magenta", hex: "#ae81ff" },
-  { name: "br.cyan", hex: "#66d9ef" },
-  { name: "br.white", hex: "#f8f8f2" },
+  { name: "br.red", hex: "#fc2f78" },
+  { name: "br.green", hex: "#9ed72b" },
+  { name: "br.yellow", hex: "#e4d971" },
+  { name: "br.blue", hex: "#4197f1" },
+  { name: "br.magenta", hex: "#b389ff" },
+  { name: "br.cyan", hex: "#60d6ec" },
+  { name: "br.white", hex: "#f4f4ec" },
 ];

@@ -13,17 +13,16 @@
   --wrap-guide: #464741;
   --cursor: #f8f8f0;
   /* ===== コアシンタックス ===== */
-  --red: #f92672;
-  --green: #a6e22e;
-  --cyan: #66d9ef;
-  --purple: #ae81ff;
-  --orange: #fd971f;
-  --yellow: #e6db74;
-  --fg: #f8f8f2;
+  --red: #fc2f78;
+  --green: #9ed72b;
+  --cyan: #60d6ec;
+  --purple: #b389ff;
+  --orange: #ff9f2f;
+  --yellow: #e4d971;
+  --fg: #f4f4ec;
   /* custom（非 Monokai） */
-  --blue: #2689f2;
-  --blue3: #819aff;
-  --byellow: #e2e22e;
+  --blue: #4197f1;
+  --byellow: #e4d971;
   /* ===== 選択・ハイライト（α フィル）===== */
   --hl-write: #788d8750; /* document_highlight.write */
   --hl-read: #788d8750; /* document_highlight.read */
@@ -44,14 +43,15 @@
   --err-fg: #ffb3cd;
   --warn-fg: #f3f3a0;
   --info-fg: #bfe4fb;
-  /* ===== ターミナル ANSI（normal）。bright 系は core を再利用 ===== */
-  --ansi-red: #c4265e;
-  --ansi-green: #86b42b;
-  --ansi-yellow: #b3b42b;
-  --ansi-blue: #6a7ec8;
-  --ansi-magenta: #8c6bc8;
-  --ansi-cyan: #56adbc;
-  --ansi-br-black: #666666;
+  /* ===== ターミナル ANSI（normal / bright 共通）===== */
+  --ansi-black: #666666;
+  --ansi-red: var(--red);
+  --ansi-green: var(--green);
+  --ansi-yellow: var(--yellow);
+  --ansi-blue: var(--blue);
+  --ansi-magenta: var(--purple);
+  --ansi-cyan: var(--cyan);
+  --ansi-white: var(--fg);
 }
 * {
   box-sizing: border-box;
@@ -66,12 +66,31 @@ body {
   padding: 40px clamp(16px, 4vw, 64px) 80px;
 }
 h1 {
-  font-size: 24px;
+  font-size: 2rem;
   margin: 0 0 4px;
 }
-h1 .accent {
+.red {
+  color: var(--red);
+}
+.green {
+  color: var(--green);
+}
+.cyan {
+  color: var(--cyan);
+}
+.purple {
+  color: var(--purple);
+}
+.orange {
+  color: var(--orange);
+}
+.yellow {
+  color: var(--yellow);
+}
+.blue {
   color: var(--blue);
 }
+
 .sub {
   color: var(--linenum);
   margin: 0 0 32px;
@@ -313,28 +332,25 @@ pre.term .t-pur {
 }
 /* bright */
 .b-red {
-  color: var(--red);
+  color: var(--ansi-red);
 }
 .b-grn {
-  color: var(--green);
+  color: var(--ansi-green);
 }
 .b-yel {
-  color: var(--byellow);
+  color: var(--ansi-yellow);
 }
 .b-blu {
-  color: var(--blue3);
+  color: var(--ansi-blue);
 }
 .b-mag {
-  color: var(--purple);
+  color: var(--ansi-magenta);
 }
 .b-cyn {
-  color: var(--cyan);
-}
-.b-wht {
-  color: var(--fg);
+  color: var(--ansi-cyan);
 }
 .b-blk {
-  color: var(--ansi-br-black);
+  color: var(--ansi-black);
 }
 .t-dim {
   color: var(--brown);
@@ -638,13 +654,7 @@ pre.term .t-pur {
   background: var(--del-bg-strong);
   border-radius: 2px;
 }
-.diff .sub {
-  padding: 5px 12px;
-  font-size: 11px;
-  color: var(--linenum);
-  background: var(--chrome);
-  border-top: 1px solid var(--surface);
-}
+
 /* split */
 .diff-split {
   display: flex;

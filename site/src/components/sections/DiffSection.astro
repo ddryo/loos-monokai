@@ -1,14 +1,14 @@
 ---
-import Section from '../Section.astro';
-import SwatchGrid from '../SwatchGrid.astro';
-import { diff } from '../../data/palette';
+import Section from "../Section.astro";
+import SwatchGrid from "../SwatchGrid.astro";
+import { diff } from "../../data/palette";
 
 // Unified（インライン）と Split（左右分割）の 2 レイアウトを再現。波括弧・記号を含むため set:html で出力する。
 const unifiedDiff = `<div class="dh">loos-monokai.json <span class="stat-add">+3</span> <span class="stat-del">−2</span><span style="margin-left:auto;color:var(--brown);">Unified</span></div>
 <div class="dhunk">@@ -103,4 +103,4 @@ "style"</div>
-<pre><div class="dl del bar-mod"><span class="go">103</span><span class="gn"></span><span class="sg">−</span><span class="tx"><span class="jkey">"info"</span>: "<span class="w-del">#819aff</span>",</span></div><div class="dl add bar-mod"><span class="go"></span><span class="gn">103</span><span class="sg">+</span><span class="tx"><span class="jkey">"info"</span>: "<span class="w-add">#2689f2</span>",</span></div><div class="dl del bar-mod"><span class="go">104</span><span class="gn"></span><span class="sg">−</span><span class="tx"><span class="jkey">"info.background"</span>: "<span class="w-del">#546190</span>",</span></div><div class="dl add bar-mod"><span class="go"></span><span class="gn">104</span><span class="sg">+</span><span class="tx"><span class="jkey">"info.background"</span>: "<span class="w-add">#3c708c</span>",</span></div><div class="dl"><span class="go">105</span><span class="gn">105</span><span class="sg"> </span><span class="tx">  <span class="jkey">"info.border"</span>: "#2689f2",</span></div></pre>
+<pre><div class="dl del bar-mod"><span class="go">103</span><span class="gn"></span><span class="sg">−</span><span class="tx"><span class="jkey">"info"</span>: "<span class="w-del">#819aff</span>",</span></div><div class="dl add bar-mod"><span class="go"></span><span class="gn">103</span><span class="sg">+</span><span class="tx"><span class="jkey">"info"</span>: "<span class="w-add">#4197f1</span>",</span></div><div class="dl del bar-mod"><span class="go">104</span><span class="gn"></span><span class="sg">−</span><span class="tx"><span class="jkey">"info.background"</span>: "<span class="w-del">#546190</span>",</span></div><div class="dl add bar-mod"><span class="go"></span><span class="gn">104</span><span class="sg">+</span><span class="tx"><span class="jkey">"info.background"</span>: "<span class="w-add">#3c708c</span>",</span></div><div class="dl"><span class="go">105</span><span class="gn">105</span><span class="sg"> </span><span class="tx">  <span class="jkey">"info.border"</span>: "#4197f1",</span></div></pre>
 <div class="dhunk">@@ -150,3 +150,4 @@ "syntax"</div>
-<pre><div class="dl"><span class="go">150</span><span class="gn">150</span><span class="sg"> </span><span class="tx">  <span class="jkey">"property"</span>: { "color": "#f8f8f2" },</span></div><div class="dl add bar-add"><span class="go"></span><span class="gn">151</span><span class="sg">+</span><span class="tx">  <span class="jkey">"property.json_key"</span>: { "color": "<span class="w-add">#66d9ef</span>" },</span></div><div class="dl"><span class="go">151</span><span class="gn">152</span><span class="sg"> </span><span class="tx">  <span class="jkey">"selector"</span>: { "color": "#a6e22e" },</span></div></pre>`;
+<pre><div class="dl"><span class="go">150</span><span class="gn">150</span><span class="sg"> </span><span class="tx">  <span class="jkey">"property"</span>: { "color": "#f4f4ec" },</span></div><div class="dl add bar-add"><span class="go"></span><span class="gn">151</span><span class="sg">+</span><span class="tx">  <span class="jkey">"property.json_key"</span>: { "color": "<span class="w-add">#60d6ec</span>" },</span></div><div class="dl"><span class="go">151</span><span class="gn">152</span><span class="sg"> </span><span class="tx">  <span class="jkey">"selector"</span>: { "color": "#9ed72b" },</span></div></pre>`;
 
 const splitDiff = `<div class="dh">loos-monokai.json <span class="stat-add">+3</span> <span class="stat-del">−2</span><span style="margin-left:auto;color:var(--brown);">Split</span></div>
 <div class="diff-split">
@@ -16,42 +16,23 @@ const splitDiff = `<div class="dh">loos-monokai.json <span class="stat-add">+3</
     <div class="ds-l"><span class="n">36</span><span class="c"><span class="pun">  });</span></span></div>
     <div class="ds-l del"><span class="n">103</span><span class="c"><span class="jkey">"info"</span>: "<span class="w-del">#819aff</span>",</span></div>
     <div class="ds-l del"><span class="n">104</span><span class="c"><span class="jkey">"info.background"</span>: "<span class="w-del">#546190</span>",</span></div>
-    <div class="ds-l"><span class="n">105</span><span class="c"><span class="jkey">"info.border"</span>: "#2689f2",</span></div>
+    <div class="ds-l"><span class="n">105</span><span class="c"><span class="jkey">"info.border"</span>: "#4197f1",</span></div>
     <div class="ds-l hatch"><span class="n"></span><span class="c"></span></div>
     <div class="ds-l"><span class="n">150</span><span class="c"><span class="jkey">"property"</span>: { ... },</span></div>
   </div>
   <div class="side">
     <div class="ds-l"><span class="n">36</span><span class="c"><span class="pun">  });</span></span></div>
-    <div class="ds-l add"><span class="n">103</span><span class="c"><span class="jkey">"info"</span>: "<span class="w-add">#2689f2</span>",</span></div>
+    <div class="ds-l add"><span class="n">103</span><span class="c"><span class="jkey">"info"</span>: "<span class="w-add">#4197f1</span>",</span></div>
     <div class="ds-l add"><span class="n">104</span><span class="c"><span class="jkey">"info.background"</span>: "<span class="w-add">#3c708c</span>",</span></div>
-    <div class="ds-l"><span class="n">105</span><span class="c"><span class="jkey">"info.border"</span>: "#2689f2",</span></div>
+    <div class="ds-l"><span class="n">105</span><span class="c"><span class="jkey">"info.border"</span>: "#4197f1",</span></div>
     <div class="ds-l add"><span class="n">151</span><span class="c"><span class="w-add"><span class="jkey">"property.json_key"</span>: { ... },</span></span></div>
     <div class="ds-l"><span class="n">150</span><span class="c"><span class="jkey">"property"</span>: { ... },</span></div>
   </div>
-</div>
-<div class="sub">左＝旧（削除側・ピンクのガターバー）/ 右＝新（追加側・緑のガターバー）/ 片側のみの変更は斜線ハッチ。</div>`;
+</div>`;
 ---
 
 <Section title="4. diff 系" tag="Git">
   <SwatchGrid items={diff} />
-  <p class="note" style="margin-bottom:10px;">
-    Zed は <code>diff_view_style</code> で <b>Unified（インライン）</b> と <b>Split（左右分割）</b> の2レイアウト。両方を再現。
-  </p>
-
-  <div class="diff" set:html={unifiedDiff}></div>
-  <p class="note">
-    行頭に <code>+</code>/<code>-</code> 記号は付けず、行背景＋ガターバーで示す。行番号は1列のみ（削除行はブランク）。行背景＝追加:緑
-    <code>#63862130</code> / 削除:赤 <code>#90274a30</code>。<b>左端のガターバーはハンク種別</b>を表す: <b
-      style="color:var(--yellow);"
-      >追加＋削除が混在＝黄 <code>#e6db74</code></b
-    > / <span style="color:var(--green);">純追加＝緑</span> / <span style="color:var(--red);">純削除＝ピンク</span
-    >。Unified では変更ブロックの縦バーが黄色になる。
-  </p>
-
-  <div class="diff" set:html={splitDiff}></div>
-  <p class="note">
-    Split では変更が無い側が <b>斜線ハッチ</b>で表示され、左端の縦バーが <b
-      >削除＝ピンク <code>#f92672</code> / 追加＝緑 <code>#a6e22e</code></b
-    > で色分けされます。
-  </p>
+  <div class="diff" set:html={unifiedDiff} />
+  <div class="diff" set:html={splitDiff} />
 </Section>
