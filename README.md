@@ -2,7 +2,7 @@
 
 [Zed](https://zed.dev)向けにカスタマイズしたMonokaiテーマ。シンタックス・Git diff・LSP診断・統合ターミナルの配色を調整しています。
 
-🎨 **[カラーパレット & プレビュー](https://ddryo.github.io/zed-loos-monokai/)**
+🎨 **[カラーパレット & プレビュー](https://ddryo.github.io/loos-monokai/)**
 
 ## Packages
 
@@ -58,7 +58,7 @@ Zedの拡張機能申請時は、`zed-industries/extensions`側で`path = "zed"`
 mv ~/dotfiles/vscode/extensions/theme-monokai-customized \
   ~/dotfiles/vscode/extensions/theme-monokai-customized.bak
 
-ln -s ~/DEV/Tools/zed-loos-monokai/vscode \
+ln -s ~/DEV/Tools/loos-monokai/vscode \
   ~/dotfiles/vscode/extensions/theme-loos-monokai
 ```
 
