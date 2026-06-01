@@ -1,4 +1,4 @@
-// テーマ themes/loos-monokai.json のカラーを、機能グループ別に「色 + 役割」で整理したデータ。
+// テーマ zed/themes/loos-monokai.json のカラーを、機能グループ別に「色 + 役割」で整理したデータ。
 // プレビューのスウォッチ表示はすべてここから生成する。
 
 export interface Swatch {

@@ -1,0 +1,17 @@
+{
+	"name": "theme-loos-monokai",
+	"version": "0.1.0",
+	"publisher": "vscode",
+	"engines": {
+		"vscode": "*"
+	},
+	"contributes": {
+		"themes": [
+			{
+				"label": "LOOS-Monokai",
+				"uiTheme": "vs-dark",
+				"path": "./themes/monokai-color-theme.json"
+			}
+		]
+	}
+}

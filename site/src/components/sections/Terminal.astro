@@ -7,21 +7,21 @@ import AnsiGrid from "../AnsiGrid.astro";
 const term = `<span class="t-grn">ryo</span><span class="t-fg"> in </span><span class="t-cyn">zed-loos-monokai</span><span class="t-pur"> on </span><span class="t-red"> main</span><span class="t-yel"> ✗</span>
 <span class="t-blu">❯</span><span class="t-fg"> eza -l --git</span>
 <span class="t-blu">drwxr-xr-x</span><span class="t-fg">  - ryo </span><span class="t-grn">1 Jun 09:47</span><span class="t-blu"> site</span>
-<span class="t-blu">drwxr-xr-x</span><span class="t-fg">  - ryo </span><span class="t-grn">1 Jun 10:42</span><span class="t-blu"> themes</span>
-<span class="t-fg">.rw-r--r--  293 ryo </span><span class="t-grn">30 May 23:32</span><span class="t-fg"> extension.toml</span>
+<span class="t-blu">drwxr-xr-x</span><span class="t-fg">  - ryo </span><span class="t-grn">1 Jun 10:42</span><span class="t-blu"> zed</span>
+<span class="t-blu">drwxr-xr-x</span><span class="t-fg">  - ryo </span><span class="t-grn">1 Jun 10:42</span><span class="t-blu"> vscode</span>
 
 <span class="b-blu">❯</span><span class="t-fg"> nr build</span>
 <span class="b-grn">✓</span><span class="t-fg"> 142 modules transformed</span>
 <span class="b-yel">⚠</span><span class="t-fg">  WARN  </span><span class="t-dim">preview data changed</span>
 <span class="b-cyn">ℹ</span><span class="t-fg">  built in </span><span class="b-grn">1.24s</span>
 
-<span class="t-blu">❯</span><span class="t-fg"> git diff -- themes/loos-monokai.json</span>
+<span class="t-blu">❯</span><span class="t-fg"> git diff -- zed/themes/loos-monokai.json</span>
 <span class="t-yel">@@ -86,1 +86,1 @@</span>
 <span class="t-red">-  "terminal.ansi.bright_blue": "#819aff"</span>
 <span class="t-grn">+  "terminal.ansi.bright_blue": "#4197f1"</span>
 
-<span class="t-blu">❯</span><span class="t-fg"> rg "terminal.ansi.blue|terminal.ansi.bright_blue" themes</span>
-<span class="b-mag">themes/loos-monokai.json</span>
+<span class="t-blu">❯</span><span class="t-fg"> rg "terminal.ansi.blue|terminal.ansi.bright_blue" zed/themes</span>
+<span class="b-mag">zed/themes/loos-monokai.json</span>
 <span class="b-grn">78</span><span class="t-fg">:  "</span><span class="b-red">terminal.ansi.blue</span><span class="t-fg">": "#4197f1",</span>
 <span class="b-grn">86</span><span class="t-fg">:  "</span><span class="b-red">terminal.ansi.bright_blue</span><span class="t-fg">": "#4197f1",</span>
 <span class="b-yel">*</span><span class="b-blk"> dbe07cf</span><span class="t-fg"> align terminal ansi colors </span><span class="b-cyn">(HEAD -&gt; main)</span>
