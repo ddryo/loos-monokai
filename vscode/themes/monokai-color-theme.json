@@ -303,6 +303,14 @@
 			}
 		},
 		{
+			"name": "CSS property name",
+			"scope": "support.type.property-name",
+			"settings": {
+				"fontStyle": "",
+				"foreground": "#F4F4EC"
+			}
+		},
+		{
 			"name": "Library variable",
 			"scope": "support.other.variable",
 			"settings": {
