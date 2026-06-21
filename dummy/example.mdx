@@ -1,0 +1,62 @@
+---
+title: Dummy MDX
+draft: false
+tags: [alpha, beta]
+---
+
+import { Card, Badge } from "@/components";
+import Chart from "@/components/Chart";
+
+export const meta = { author: "dummy", count: 3 };
+
+{/* dummy comment */}
+
+# Dummy Title
+
+Lorem ipsum **bold**, *italic*, ~~strike~~, `code`, [link](https://example.com).
+
+```jsx
+<Badge>badge</Badge>
+```
+
+<span>inline component</span> mixed with text.
+
+<p>card</p>
+
+```jsx
+<Badge>badge</Badge>
+```
+
+## Section before the code block
+
+- item one
+- item two
+
+> blockquote sample
+
+```js
+// dummy code block
+const sum = (a, b) => a + b;
+console.log(sum(2, 3));
+```
+
+ここから下がコードブロックの後。崩れやすいゾーン。
+
+## Section after the code block
+
+```jsx
+<Badge>badge</Badge>
+```
+
+```ts
+type Item = { id: number; label: string };
+const list: Item[] = [];
+```
+
+<Divider />
+
+Final paragraph with a self-closing <Badge /> and the end.
+
+```jsx
+<Badge>
+```

@@ -1,0 +1,10 @@
+/* dummy styles */
+.alpha {
+  display: flex;
+  gap: var(--gap, 16px);
+  background: url("../assets/img.jpg");
+}
+.alpha:hover {
+  color: rgba(10, 20, 30, 0.5);
+  margin: clamp(1rem, 2vw, 3rem);
+}
